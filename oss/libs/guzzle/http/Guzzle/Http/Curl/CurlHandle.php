@@ -71,6 +71,10 @@ class CurlHandle
             $curlOptions[CURLOPT_PROTOCOLS] = CURLPROTO_HTTP | CURLPROTO_HTTPS;
         }
 
+        if (env('PROXY')) {
+          $curlOptions[CURLOPT_PROXY] = env('PROXY');
+        }
+
         // Add CURLOPT_ENCODING if Accept-Encoding header is provided
         if ($acceptEncodingHeader = $request->getHeader('Accept-Encoding')) {
             $curlOptions[CURLOPT_ENCODING] = (string) $acceptEncodingHeader;
